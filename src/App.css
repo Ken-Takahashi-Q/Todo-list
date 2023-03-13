@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Josefin+Sans:wght@400;700&display=swap');
+
+:root {
+  --bright-blue: hsl(220, 98%, 61%);
+  --check-bg: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+
+[data-theme="light"] {
+  --card-bg: hsl(0, 0%, 98%);
+  --line: hsl(236, 33%, 92%);
+  --app-bg: hsl(233, 11%, 84%);
+  --not-hold: hsl(236, 9%, 61%);
+  --cursor-hold: hsl(235, 19%, 35%);
+  --text: hsl(235, 19%, 35%);
+  --complete: hsl(233, 11%, 84%);
+  --circle-color: hsl(233, 11%, 84%);
+}
+
+[data-theme="dark"] {
+  --card-bg: hsl(235, 24%, 19%);
+  --line: hsl(233, 14%, 35%);;
+  --app-bg: hsl(235, 21%, 11%);
+  --not-hold: hsl(236, 9%, 61%);
+  --cursor-hold: hsl(236, 33%, 92%);
+  --text: hsl(234, 39%, 85%);
+  --complete: hsl(234, 11%, 52%);
+  --circle-color: hsl(237, 14%, 26%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 18px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* header {
+  width: 100%;
+  height: 300px;
+  background-image: url("src/images/bg-desktop-dark.jpg");
+  background-repeat: no-repeat;
+  object-fit: cover;
+} */
+
+header img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-new, .task {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text);
+  background-color: var(--card-bg);
+}
+
+.check-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid red;
+  border-radius: 50%;
+}
+.check-box img {
+  width: 0.6rem;
+  height: 0.6rem;
+}
+
+.check-box:hover {
+  border-color: var(--check-bg);
+  cursor: pointer;
+}
+
+.create-new-typing input {
+  border: none;
+  background: transparent;
+}
+
+.create-new-typing input:focus {
+  border: none;
+  background: transparent;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+}
+
+.task p {
+  cursor: pointer;
+}
