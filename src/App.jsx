@@ -3,15 +3,19 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
+  // Dark mode
   const [darkMode, setDarkMode] = useState(true);
+  const root = document.querySelector(':root');
+	
+	const themeChange = () => {
+		setDarkMode(!darkMode);
+		root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
+	};
 
-  const [task, setTask] = useState([]);
+  // Tasks list
+  const [tasks, setTasks] = useState(["Complete online JavaScript course", "Jog around the park 3x", "10 minutes meditation", "Read for 1 hour", "Pick up groceries", "Complete Todo App on Frontend Mentor"]);
   const [newTask, setNewTask] = useState('');
-  const [checkbox, setCheckbox] = useState(Array(task.length).fill(false));
-
-  const handleInputChange = (e) => {
-    setNewTask(e.target.value);
-  };
+  const [checkbox, setCheckbox] = useState(Array(tasks.length).fill(false));
 
   const handleCheckboxClick = (index) => {
     setCheckbox((prevCheckbox) => {
@@ -26,10 +30,14 @@ function App() {
       return;
     }
 
-    setTask((prevTasks) => [...prevTasks, newTask.trim()]);
+    setTasks((prevTasks) => [...prevTasks, newTask.trim()]);
     setNewTask('');
     setCheckbox((prevCheckboxes) => [...prevCheckboxes, false]);
   };
+
+  const handleDelete = (index) => {
+
+  }
 
   return (
     <div className="App">
@@ -40,36 +48,34 @@ function App() {
       <div className="todo-app">
         <div className="topbar">
           <h1>TODO</h1>
-          <div className="theme-switch" onClick={() => setDarkMode(!darkMode)}>
+          <div className="theme-switch" onClick={themeChange}>
             <img src={darkMode ? "src/images/icon-sun.svg" : "src/images/icon-moon.svg"} alt="sun" />
           </div>
         </div>
 
         <div className="create-new">
-          <div className="check-box" style={{backgroundColor: checkbox ? "var(--check-bg)" : "transparent"}}>
-            <img src="src/images/icon-check.svg" alt="tick" />
-          </div>
-          <div className="create-new-typing">
             <input
               placeholder="Create a new todo..."
             />
-          </div>
         </div>
 
         <div className="todo">
-          <div className="task">
-            <div className="check-box">
-
+          {tasks.map((task, index) => (
+            <div className="task" key={index}>
+              <div className="task-left">
+                <div className="check-box" style={{backgroundColor: checkbox ? "var(--check-bg)" : "transparent"}}>
+                  <img src="src/images/icon-check.svg" alt="tick" />
+                </div>
+                <p>{task}</p>
+              </div>
+              
+              <div className="delete-task" onClick={handleDelete}>
+                <img src="src/images/icon-cross.svg" alt="close" />
+              </div>
+              
             </div>
-            <p>Complete online JavaScript course</p>
-          </div>
+          ))}
 
-          <div className="task">
-            <div className="check-box">
-
-            </div>
-            <p>Jog around the park 3x</p>
-          </div>
         </div>
 
       </div>
@@ -78,4 +84,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
