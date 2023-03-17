@@ -98,14 +98,14 @@ function App() {
   return (
     <div className="App">
       <header>
-        <img src={darkMode ? "src/images/bg-desktop-dark.jpg" : "src/images/bg-desktop-light.jpg"} alt="banner" />
+        <img src={darkMode ? "public/images/bg-desktop-dark.jpg" : "public/images/bg-desktop-light.jpg"} alt="banner" />
       </header>
 
       <div className="todo-app">
         <div className="topbar">
           <h1>TODO</h1>
           <div className="theme-switch" onClick={themeChange}>
-            <img src={darkMode ? "src/images/icon-sun.svg" : "src/images/icon-moon.svg"} alt="sun" />
+            <img src={darkMode ? "public/images/icon-sun.svg" : "public/images/icon-moon.svg"} alt="sun" />
           </div>
         </div>
 
