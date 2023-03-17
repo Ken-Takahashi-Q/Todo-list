@@ -1,15 +1,14 @@
 {
   "name": "todo-list",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ken-takahashi-q.github.io/Todo-list",
+  "homepage": "https://ken-takahashi-q.github.io/Todo-list/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
