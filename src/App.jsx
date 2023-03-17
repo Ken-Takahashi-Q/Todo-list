@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
@@ -24,29 +24,33 @@ function App() {
   const [checkbox, setCheckbox] = useState(Array(tasks.length).fill(false));
   const [completedTasks, setCompletedTasks] = useState([]);
 
-  const handleCheckboxClick = (index) => {
-    setCheckbox((prevCheckbox) => {
-      const newCheckbox = [...prevCheckbox];
-      newCheckbox[index] = !prevCheckbox[index];
-      return newCheckbox;
-    });
-  };
-
+  // add new task from input
   const handleAddTask = (e) => {
-    if (e.key === "Enter" && e.target.value !== "") {
-      setTasks([...tasks, {text: e.target.value, complete: false}]);
+    if (e.key === "Enter") {
+      const newTaskName = e.target.value;
+      setTasks((prevTasks) => [...prevTasks, { name: newTaskName, completed: false }]);
       e.target.value = "";
     }
   };
-
-  const handleDelete = (task) => {
-    setTasks(tasks.filter((t) => t !== task));
-    setCompletedTasks(completedTasks.filter((t) => t !== task));
+  
+  // make line across on text when ticked
+  const handleCheckboxClick = (index) => {
+    setTasks((prevTasks) => {
+      const newTasks = [...prevTasks];
+      newTasks[index] = { ...newTasks[index], completed: !newTasks[index].completed };
+      return newTasks;
+    });
   };
 
-
+  // delete task when 'cross' is clicked
+  const handleDelete = (index) => {
+    setTasks((prevTasks) => {
+      const newTasks = [...prevTasks];
+      newTasks.splice(index, 1);
+      return newTasks;
+    });
+  };
   
-
   return (
     <div className="App">
       <header>
@@ -70,18 +74,19 @@ function App() {
 
         <div className="todo">
         {tasks.map((task, index) => (
-  <div className="task" key={index}>
-    <div className="task-left">
-      <div className="check-box" onClick={() => handleCheckboxClick(index)} style={{backgroundColor: task.completed ? "var(--check-bg)" : "transparent"}}>
-        {task.completed && <img src="src/images/icon-check.svg" alt="tick" />}
-      </div>
-      <p className={task.completed ? 'completed' : ''}>{task.name}</p>
-    </div>
-    <div className="delete-task" onClick={() => handleDelete(index)}>
-      <img src="src/images/icon-cross.svg" alt="close" />
-    </div>
-  </div>
-))}
+          <div className="task" key={index}>
+            <div className="task-left">
+              <div className="check-box" onClick={() => handleCheckboxClick(index)} style={{backgroundColor: task.completed ? "var(--bright-blue)" : "transparent"}}>
+                {task.completed && <img src="src/images/icon-check.svg" alt="tick" />}
+              </div>
+              <p className={task.completed ? 'completed' : ''}>{task.name}</p>
+            </div>
+
+            <div className="delete-task" onClick={() => handleDelete(index)}>
+              <img src="src/images/icon-cross.svg" alt="close" />
+            </div>
+          </div>
+        ))}
 
         </div>
 

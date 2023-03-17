@@ -110,13 +110,18 @@ header img {
   gap: 1rem;
 }
 
+.task .completed {
+  color: var(--complete);
+  text-decoration: line-through;
+}
+
 .check-box {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 1rem;
   height: 1rem;
-  border: 1px solid red;
+  border: 1px solid var(--circle-color);
   border-radius: 50%;
 }
 .check-box img {
