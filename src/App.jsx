@@ -98,14 +98,14 @@ function App() {
   return (
     <div className="App">
       <header>
-        <img src={darkMode ? "public/images/bg-desktop-dark.jpg" : "public/images/bg-desktop-light.jpg"} alt="banner" />
+        <img src={darkMode ? "/images/bg-desktop-dark.jpg" : "/images/bg-desktop-light.jpg"} alt="banner" />
       </header>
 
       <div className="todo-app">
         <div className="topbar">
           <h1>TODO</h1>
           <div className="theme-switch" onClick={themeChange}>
-            <img src={darkMode ? "public/images/icon-sun.svg" : "public/images/icon-moon.svg"} alt="sun" />
+            <img src={darkMode ? "/images/icon-sun.svg" : "/images/icon-moon.svg"} alt="sun" />
           </div>
         </div>
 
@@ -129,7 +129,7 @@ function App() {
                     onClick={() => handleCheckboxClick(index)}
                     style={{backgroundColor: task.completed ? "var(--bright-blue)" : "transparent"}}
                   >
-                    {task.completed && <img src="src/images/icon-check.svg" alt="tick" />}
+                    {task.completed && <img src="/images/icon-check.svg" alt="tick" />}
                   </div>
 
                   <p
@@ -142,7 +142,7 @@ function App() {
   
                 {/* cross icon */}
                 <div className="delete-task" onClick={() => handleDelete(index)}>
-                  <img src="src/images/icon-cross.svg" alt="close" />
+                  <img src="/images/icon-cross.svg" alt="close" />
                 </div>
               </div>
             )
