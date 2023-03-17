@@ -19,19 +19,19 @@ function App() {
 
   // default tasks list
   const [tasks, setTasks] = useState([
-    {name: "Complete online JavaScript course", completed: false},
-    {name: "Jog around the park 3x", completed: false},
-    {name: "10 minutes meditation", completed: false},
-    {name: "Read for 1 hour", completed: false},
-    {name: "Pick up groceries", completed: false},
-    {name: "Complete Todo App on Frontend Mentor", completed: false}
+    {id: 1, name: "Complete online JavaScript course", completed: false},
+    {id: 2, name: "Jog around the park 3x", completed: false},
+    {id: 3, name: "10 minutes meditation", completed: false},
+    {id: 4, name: "Read for 1 hour", completed: false},
+    {id: 5, name: "Pick up groceries", completed: false},
+    {id: 6, name: "Complete Todo App on Frontend Mentor", completed: false}
   ]);
 
   // add new task from input
   const handleAddTask = (e) => {
     if (e.key === "Enter") {
       const newTaskName = e.target.value;
-      setTasks((prevTasks) => [...prevTasks, { name: newTaskName, completed: false }]);
+      setTasks((prevTasks) => [...prevTasks, { id: tasks.length, name: newTaskName, completed: false }]);
       e.target.value = "";
     }
   };
@@ -84,17 +84,35 @@ function App() {
     setTasks(tasks.filter(task => !task.completed));
   };
 
-  // drag and drop (not using)
-  const handleDragEnd = (result) => {
-    if (!result.destination) return;
+  // drag and drop
+  const [draggedTaskIndex, setDraggedTaskIndex] = useState(null);
+
+  const handleDragStart = index => {
+    setDraggedTaskIndex(index);
+  };
   
-    const items = Array.from(tasks);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-  
-    setTasks(items);
+  // normal drag and drop, not beautiful
+  const handleDrop = index => {
+    if (draggedTaskIndex !== index) {
+      const newTasks = [...tasks];
+      const draggedTask = newTasks[draggedTaskIndex];
+      newTasks.splice(draggedTaskIndex, 1);
+      newTasks.splice(index, 0, draggedTask);
+      setTasks(newTasks);
+    };
   };
 
+  // dnd (not using)
+  // const handleDragEnd = (result) => {
+  //   if (!result.destination) return;
+
+  //   const newTasks = Array.from(tasks);
+  //   const [reorderedTask] = newTasks.splice(result.source.index, 1);
+  //   newTasks.splice(result.destination.index, 0, reorderedTask);
+
+  //   setTasks(newTasks);
+  // };
+ 
   return (
     <div className="App">
       <header>
@@ -116,16 +134,24 @@ function App() {
             />
         </div>
 
-        
         <div className="todo">
           {tasks.map((task, index) => {
+            // return nothing if no to show
             if ((showActive && task.completed) || (showCompleted && !task.completed)) {
               return null;
             }
             return (
-              <div className="task" key={index}>
+              <div
+                className="task"
+                key={index}
+                draggable={true}
+                onDragStart={() => handleDragStart(index)}
+                onDragOver={event => event.preventDefault()}
+                onDrop={() => handleDrop(index)}
+              >
                 <div className="task-left">
-                  <div className="check-box"
+                  <div
+                    className="check-box"
                     onClick={() => handleCheckboxClick(index)}
                     style={{backgroundColor: task.completed ? "var(--bright-blue)" : "transparent"}}
                   >
@@ -138,12 +164,13 @@ function App() {
                   >
                     {task.name}
                   </p>
+
                 </div>
-  
-                {/* cross icon */}
+
                 <div className="delete-task" onClick={() => handleDelete(index)}>
                   <img src="/images/icon-cross.svg" alt="close" />
                 </div>
+
               </div>
             )
           })}
@@ -163,6 +190,7 @@ function App() {
             </div>
           </div>
 
+          {/* another menu for mobile */}
           <div className="details mobile">
             <p className="menus-text primary" onClick={handleShowAll}>All</p>
             <p className="menus-text" onClick={handleShowActive}>Active</p>
@@ -171,8 +199,10 @@ function App() {
 
         </div>
 
+        <div className="advice">
+          <p>Drag and drop to reorder list</p>
+        </div>
       </div>
-
     </div>
   )
 }

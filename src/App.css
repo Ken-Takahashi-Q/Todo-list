@@ -201,6 +201,17 @@ header img {
   cursor: pointer;
 }
 
+.advice {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  color: var(--not-hold);
+  font-size: 0.8rem;
+}
+.advice p {
+  font-size: 0.8rem;
+}
+
 @media screen and (max-width: 600px) {
   .todo-app {
     width: 90%;
