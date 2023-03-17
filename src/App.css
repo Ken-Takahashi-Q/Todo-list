@@ -75,6 +75,7 @@ header img {
   width: 500px;
   padding-top: 5rem;
   gap: 1rem;
+  transition: 0.5s ease-in-out;
   z-index: 10;
 }
 
@@ -99,6 +100,7 @@ header img {
 
 .todo {
   border-radius: 0.2rem;
+  overflow: hidden;
 }
 
 .task {
@@ -128,7 +130,6 @@ header img {
   width: 0.6rem;
   height: 0.6rem;
 }
-
 .check-box:hover {
   border-color: var(--check-bg);
   cursor: pointer;
@@ -142,7 +143,6 @@ header img {
   background: transparent;
   color: var(--text);
 }
-
 .create-new input:focus {
   outline: none;
   background: transparent;
@@ -152,7 +152,6 @@ header img {
   display: flex;
   align-items: center;
 }
-
 .task p {
   cursor: pointer;
 }
@@ -161,4 +160,64 @@ header img {
   width: 0.8rem;
   height: 0.8rem;
   cursor: pointer;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.8rem 1rem 0.8rem;
+  background-color: var(--card-bg);
+  color: var(--complete);
+}
+.details p {
+  font-size: 0.9rem;
+}
+.mobile {
+  display: none;
+}
+
+.details {
+  color: var(--not-hold);
+}
+.menus {
+  display: flex;
+  gap: 1rem;
+}
+
+.primary {
+  color: var(--bright-blue) !important;
+}
+.primary:active {
+  font-weight: 700;
+}
+.menus-text:hover {
+  color: var(--text);
+  cursor: pointer;
+}
+
+.clear-completed:hover {
+  color: var(--text);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .todo-app {
+    width: 90%;
+    padding-top: 3rem;
+  }
+
+  .details {
+    margin-bottom: 1rem;
+    border-radius: 0 0 0.2rem 0.2rem;
+  }
+  .menus {
+    display: none;
+  }
+  .mobile {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 0.2rem;
+  }
+  
 }
